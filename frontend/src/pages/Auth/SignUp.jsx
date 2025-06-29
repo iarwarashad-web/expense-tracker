@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/userContext.jsx";
 export default function SignUp() {
   const{updateUser} = React.useContext(UserContext);
     const [fullName, setFullName] = React.useState('');
+    const [loading, setLoading] = React.useState(false)
     const [email, setEmail] = React.useState('');       
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
@@ -25,6 +26,7 @@ export default function SignUp() {
         if(!email){setError('Email is required'); return;}
 
         try {
+          setLoading(true)
           const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
             fullName,
             email,
@@ -47,6 +49,8 @@ export default function SignUp() {
             setError('Request timed out - please try again later');
           }
        
+      } finally{
+        setLoading(false)
       }
 
     }
@@ -99,7 +103,7 @@ export default function SignUp() {
               placeholder='At least 8 character' type="password" id="confirmPassword" name="confirmPassword" required className="w-full p-2 border border-gray-300 rounded" />
               <p className='text-red-600'>{error}</p>
             </div>
-          
+          {loading && <p className='text-xl py-2 font-bold text-center'>loading...</p>}
             <button onClick={handleSignUp} type="submit" className=" w-full bg-purple-700 text-white px-4 py-2 rounded hover:bg-blue-600">Login</button>
                                   <p className="text-left my-2 text-start"> <Link className="text-purple-700 underline" to={'/login'}>Log in</Link> if you already have an account</p>
 

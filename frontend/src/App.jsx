@@ -10,6 +10,7 @@ import Income from './pages/Dashboard/Income.jsx'
 import Expense from './pages/Dashboard/Expenses.jsx'
 import UserProvider from './pages/contexts/userContext.jsx'
 import ProtectedRoute from './pages/contexts/ProtectedRoute.jsx'
+import LandingPage from './pages/LandingPage.jsx'
 function App() {
  
 
@@ -23,7 +24,7 @@ function App() {
         <Route path="/dashboard" element={<Home/>} />
          <Route path="/income" element={<Income/>} />
       <Route path="/expenses" element={<Expense/>} />
-      
+     <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="*" element={< NotFound />} />
